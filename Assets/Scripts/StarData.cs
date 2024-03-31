@@ -11,6 +11,7 @@ public class StarData
     public float hip;
     public string color;
     public float id;
+    public Vector3 velocity;
 
     public float size;
     
