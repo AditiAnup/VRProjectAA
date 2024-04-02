@@ -12,9 +12,11 @@ public class StarDataLoader : MonoBehaviour
     private int starCount = 1;
     public GameObject linePrefab;
     public TextAsset constellationsrc;
+    public TextAsset exo_data;
     //private Dictionary<string, StarData> 
     public bool show_exo = false;
     public List<GameObject> constellations = new List<GameObject>();
+
     public TextAsset[] constellationFiles;
     public Color[] colorArray = new Color[] // Colors for OBAFGKM spectral types
     {
@@ -32,10 +34,7 @@ public class StarDataLoader : MonoBehaviour
 
     void Start()
     {
-
         ParseFile();
-        
-
     }
     void Update()
     {
@@ -43,23 +42,18 @@ public class StarDataLoader : MonoBehaviour
         {
             
         }
-        if (Input.GetKeyDown(KeyCode.CapsLock))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            CreateContellations(constellationFiles[0]);
+            Debug.Log("Hello Bitches");
+            show_exoData();
         }
 
-    }
-
-    public void WesternConst()
-    {
-        CreateContellations(constellationFiles[0]);
     }
 
     public void HideConstellations()
     {
         if (constellations != null)
         {
-            //Debug.Log("Hello World");
             foreach (GameObject constellation in constellations)
             {
                 constellation.SetActive(false);
@@ -67,29 +61,97 @@ public class StarDataLoader : MonoBehaviour
         }
     }
 
-    public void IndianConst()
+    public void show_exoData()
     {
-        CreateContellations(constellationFiles[1]);
+        //Dictionary<string, GameObject> Exo_stars = new Dictionary<string, GameObject>();
+        Debug.Log("Entered exo function");
+        string allData3 = exo_data.text;
+        string[] lineData3 = allData3.Split('\n');
+        //for (var i = 1; i < lineData3.Length - 1; i++)
+        //{
+        //    string[] eachline3 = lineData3[i].Split(',');
+        //    string hip_number = (eachline3[1]);
+
+        //    //if (KeyValuePair<string, GameObject> star in starObjects && )
+        //    Exo_stars.Add(eachline3[1], starObjects[eachline3[1]]);
+
+        //}
+
+
+        for (var i = 1; i < lineData3.Length - 1; i++)
+        {
+            string[] eachline3 = lineData3[i].Split(',');
+            float.TryParse(eachline3[1], out float hip_number);
+            //string hip_number = eachline3[1].Trim().ToString();
+                
+            string colorval = eachline3[2].Trim().ToString();
+            if (colorval != null)
+            {
+                if (colorval == '1'.ToString())
+                {
+                    Debug.Log(hip_number);
+                    //star.GetComponent<Renderer>().material.SetColor("_Color", color_arr[spectral_types[colorval]]);
+                    //star.GetComponent<Renderer>().material.SetColor("_TintColor", new Color(55, 102, 250, 139));
+                    starobjects[hip_number].GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+                    Debug.Log(colorval);
+                }
+
+                else if (colorval == '2'.ToString())
+                {
+                    //star.GetComponent<Renderer>().material.color = Color.cyan;
+                    //star.GetComponent<Renderer>().material.SetColor("_TintColor", new Color(110, 160, 250, 139));
+                    //starList[hip_number].GetComponent<Renderer>().material.SetColor("_TintColor", Color.cyan);
+                    starobjects[hip_number].GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+                    Debug.Log(colorval);
+                }
+
+                else if (colorval == '3'.ToString())
+                {
+                    //star.GetComponent<Renderer>().material.color = Color.white;
+                    //star.GetComponent<Renderer>().material.SetColor("_TintColor", new Color(204, 225, 250, 139));
+                    starobjects[hip_number].GetComponent<Renderer>().material.SetColor("_Color", Color.grey);
+                    Debug.Log(colorval);
+                }
+
+                else if (colorval == '4'.ToString())
+                {
+                    //star.GetComponent<Renderer>().material.SetColor("_TintColor", new Color(55.0f, 102.0f, 250.0f, 55.0f));
+                    starobjects[hip_number].GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                    Debug.Log(colorval);
+                }
+
+                else if (colorval == '5'.ToString())
+                {
+                    starobjects[hip_number].GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+                    //star.GetComponent<Renderer>().material.SetColor("_TintColor", new Color(265, 165, 35, 103));
+                    Debug.Log(colorval);
+                }
+
+                else if (colorval == '6'.ToString())
+                {
+                    starobjects[hip_number].GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                    Debug.Log(colorval);
+                }
+
+
+            }
+
+            else
+            {
+                starobjects[hip_number].GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+
+            }
+        }
+
+
+
+
+
     }
 
-    public void AztecConst()
+    public void ConstellationSelecter(int i)
     {
-        CreateContellations(constellationFiles[2]);
-    }
-
-    public void MayaConst()
-    {
-        CreateContellations(constellationFiles[3]);
-    }
-
-    public void AnutanConst()
-    {
-        CreateContellations(constellationFiles[4]);
-    }
-
-    public void RomanianConst()
-    {
-        CreateContellations(constellationFiles[5]);
+        CreateContellations(constellationFiles[i]);
     }
 
     float ConvertVelocity(float velocity)
@@ -163,6 +225,14 @@ public class StarDataLoader : MonoBehaviour
             starMaterial.color = color;
             renderer.material = starMaterial;
         }
+    }
+
+    void MoveTime()
+    {
+        
+        // I have the velocity of the stars along with the time by which I wanna move[need to figure out how we will control the time that we want to move] The code on 
+        //chatgpt was the keyboard event I have to figure out how to make this work on menu
+        // I will use transform to change the position of the star using the 
     }
 
     void CreateContellations(TextAsset constFile)
