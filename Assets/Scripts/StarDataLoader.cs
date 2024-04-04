@@ -12,26 +12,28 @@ public class StarDataLoader : MonoBehaviour
     public GameObject cam;
     public GameObject starPrefab;
     private int starCount = 1;
-    
+
     public static float TimeVal = 1000f;
     public bool isTimeRunning = false;
 
-    Dictionary<string, int> spectral_types = new Dictionary<string, int>() { { "O", 0 }, { "B", 1 }, { "A", 2 }, { "F", 3 }, { "G", 4 }, { "K", 5 }, { "M", 6 } };
 
+    ExoColor colorinst;
     public Dictionary<float, GameObject> starobjects = new Dictionary<float, GameObject>();
     public Dictionary<float, StarData> starData = new Dictionary<float, StarData>();
-   
+
     void Start()
     {
+        colorinst = FindObjectOfType<ExoColor>();
         ParseFile();
+
     }
 
-    
+
 
     void Update()
     {
         StarRendering();
-        
+
     }
 
     float ConvertVelocity(float velocity)
@@ -78,6 +80,7 @@ public class StarDataLoader : MonoBehaviour
                 star.absMag = absoluteMagnituge;
                 star.id = id;
                 star.hip = hip;
+                star.color = csvVal[11].Trim().ToString();
 
                 starData.Add(hip, star);
                 GameObject stars = Instantiate(starPrefab, star.position, Quaternion.LookRotation(star.position), gameObject.transform);
@@ -85,44 +88,7 @@ public class StarDataLoader : MonoBehaviour
                 stars.transform.localScale = new Vector3(star.size, star.size, star.size);
                 starCount++;
                 starobjects[hip] = stars;
-                string colorval = csvVal[11].Trim().ToString();
-                if (spectral_types.ContainsKey(colorval))
-                {
-                    if (colorval == 'O'.ToString())
-                    {
-                        stars.GetComponent<Renderer>().material.SetColor("_TintColor", Color.blue);
-                    }
-
-                    else if (colorval == 'B'.ToString())
-                    {
-                        stars.GetComponent<Renderer>().material.SetColor("_TintColor", Color.cyan);
-                    }
-
-                    else if (colorval == 'A'.ToString())
-                    {
-                        
-                    }
-
-                    else if (colorval == 'F'.ToString())
-                    {
-                        stars.GetComponent<Renderer>().material.SetColor("_TintColor", Color.white);
-                    }
-
-                    else if (colorval == 'G'.ToString())
-                    {
-                        stars.GetComponent<Renderer>().material.SetColor("_TintColor", Color.yellow);
-                    }
-
-                    else if (colorval == 'K'.ToString())
-                    {
-                        stars.GetComponent<Renderer>().material.SetColor("_TintColor", Color.red);
-                    }
-
-                    else if (colorval == 'M'.ToString())
-                    {
-                        stars.GetComponent<Renderer>().material.SetColor("_TintColor", Color.magenta);
-                    }
-                }
+                
 
             }
             catch (IndexOutOfRangeException)
@@ -131,6 +97,7 @@ public class StarDataLoader : MonoBehaviour
             }
 
         }
+        colorinst.originalColor();
     }
     void StarRendering()
     {
@@ -147,6 +114,6 @@ public class StarDataLoader : MonoBehaviour
     }
 
 
-    
-    
+
+
 }

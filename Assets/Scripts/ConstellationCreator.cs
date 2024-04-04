@@ -8,6 +8,7 @@ public class ConstellationCreator : MonoBehaviour
     public TextAsset[] constellationFiles;
     public GameObject linePrefab;
     public int selectedConst = -1;
+    public List<LineRenderer> lineList = new List<LineRenderer>();
     public List<GameObject> constellations = new List<GameObject>();
     StarMove moveInst;
     void Start()
@@ -19,16 +20,17 @@ public class ConstellationCreator : MonoBehaviour
 
     public void ConstellationSelecter(int i)
     {
-        Debug.Log("It is Constellation Selector");
+        
         selectedConst = i;
         CreateContellations(constellationFiles[i]);
     }
     void DestroyInstances()
     {
-        foreach(GameObject lines in constellations)
+        foreach(LineRenderer lines in lineList)
         {
             Destroy(lines);
         }
+        
     }
 
     public void HideConstellations()
@@ -45,6 +47,7 @@ public class ConstellationCreator : MonoBehaviour
     {
         if (constellations != null)
         {
+            
             constellations = new List<GameObject>();
             DestroyInstances();
         }
@@ -69,6 +72,7 @@ public class ConstellationCreator : MonoBehaviour
                 LineRenderer line1Renderer = line1.GetComponent<LineRenderer>();
                 line1Renderer.positionCount = 2;
                 constellations.Add(line1);
+                lineList.Add(line1Renderer);
 
                 Vector3 position1 = instanceval.starobjects[float.Parse(eachLine2[j].Trim())].transform.position;
 
@@ -90,6 +94,7 @@ public class ConstellationCreator : MonoBehaviour
     {
         if (moveInst.isTimeRunning)
         {
+            Debug.Log("It is being called");
             //UpdateStarPosition(Time.deltaTime * TimeVal);
             ConstellationSelecter(selectedConst);
         }

@@ -6,10 +6,58 @@ public class ExoColor : MonoBehaviour
 {
     StarDataLoader instanceval;
     public TextAsset exo_data;
+    public bool show_exo = false;
+    Dictionary<string, int> spectral_types = new Dictionary<string, int>() { { "O", 0 }, { "B", 1 }, { "A", 2 }, { "F", 3 }, { "G", 4 }, { "K", 5 }, { "M", 6 } };
     // Start is called before the first frame update
     void Start()
     {
         instanceval = FindObjectOfType<StarDataLoader>();
+    }
+
+    public void originalColor()
+    {
+        
+        foreach (KeyValuePair<float, GameObject> starRet in instanceval.starobjects)
+        {
+            string colorval = instanceval.starData[starRet.Key].color;
+            if (spectral_types.ContainsKey(colorval))
+            {
+                if (colorval == 'O'.ToString())
+                {
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.blue);
+                }
+
+                else if (colorval == 'B'.ToString())
+                {
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.cyan);
+                }
+
+                else if (colorval == 'A'.ToString())
+                {
+
+                }
+
+                else if (colorval == 'F'.ToString())
+                {
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.white);
+                }
+
+                else if (colorval == 'G'.ToString())
+                {
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.yellow);
+                }
+
+                else if (colorval == 'K'.ToString())
+                {
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.red);
+                }
+
+                else if (colorval == 'M'.ToString())
+                {
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.magenta);
+                }
+            }
+        }
     }
 
     public void show_exoData()
@@ -74,6 +122,19 @@ public class ExoColor : MonoBehaviour
                 instanceval.starobjects[hip_number].GetComponent<Renderer>().material.SetColor("_TintColor", Color.white);
 
             }
+        }
+    }
+
+    public void ToggleColor()
+    {
+        show_exo = !show_exo;
+        if(show_exo)
+        {
+            show_exoData();
+        }
+        else
+        {
+            originalColor();
         }
     }
 
