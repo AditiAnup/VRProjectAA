@@ -21,6 +21,6 @@ public class DIstance : MonoBehaviour
     {
         Sol.transform.LookAt(Vector3.zero);
         text.transform.rotation = Camera.main.transform.rotation;
-        text.GetComponent<TextMeshPro>().text = "Distance from sun: " + Vector3.Magnitude(gameObject.transform.position) + " parsecs";
+        text.GetComponent<TextMeshPro>().text = "Distance from sun: " + Vector3.Magnitude(gameObject.transform.position).ToString("F2") + " parsecs";
     }
 }
