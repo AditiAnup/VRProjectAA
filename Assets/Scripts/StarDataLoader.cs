@@ -14,8 +14,8 @@ public class StarDataLoader : MonoBehaviour
     private int starCount = 1;
 
     public static float TimeVal = 1000f;
-    public bool isTimeRunning = false;
-
+    StarMove moveInst;
+    public float repeatRate = 0.5f;
 
     ExoColor colorinst;
     public Dictionary<float, GameObject> starobjects = new Dictionary<float, GameObject>();
@@ -24,17 +24,21 @@ public class StarDataLoader : MonoBehaviour
     void Start()
     {
         colorinst = FindObjectOfType<ExoColor>();
+        moveInst = FindObjectOfType<StarMove>();
+        Debug.Log("hi it is start function");
         ParseFile();
-
+        
+        InvokeRepeating("StarRendering", 0f, repeatRate);
+        Debug.Log("Its after invoke repeating");
     }
 
 
 
     void Update()
     {
-        StarRendering();
 
     }
+
 
     float ConvertVelocity(float velocity)
     {
@@ -84,6 +88,18 @@ public class StarDataLoader : MonoBehaviour
 
                 starData.Add(hip, star);
                 GameObject stars = Instantiate(starPrefab, star.position, Quaternion.LookRotation(star.position), gameObject.transform);
+                Renderer starRenderer = stars.GetComponent<Renderer>();
+                if (starRenderer != null)
+                {
+                    starRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                }
+
+                // Disable collision by disabling the Collider component
+                Collider starCollider = stars.GetComponent<Collider>();
+                if (starCollider != null)
+                {
+                    starCollider.enabled = false;
+                }
                 stars.name = "S" + starCount;
                 stars.transform.localScale = new Vector3(star.size, star.size, star.size);
                 starCount++;
@@ -97,18 +113,24 @@ public class StarDataLoader : MonoBehaviour
             }
 
         }
-        colorinst.originalColor();
+        
     }
     void StarRendering()
     {
         foreach (KeyValuePair<float, GameObject> starRet in starobjects)
         {
-            bool isCloseEnough = Vector3.Distance(cam.transform.position, starRet.Value.transform.position) <= 50f;
-
+            float renvalue = 50f;
+            if(moveInst.isTimeRunning)
+            {
+                renvalue = 25f;
+            }
+            bool isCloseEnough = Vector3.Distance(cam.transform.position, starRet.Value.transform.position) <= renvalue;
+            
             Renderer starRenderer = starRet.Value.GetComponent<Renderer>();
             if (starRenderer != null)
             {
                 starRenderer.enabled = isCloseEnough;
+                starRet.Value.transform.LookAt(cam.transform);
             }
         }
     }

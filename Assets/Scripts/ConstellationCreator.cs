@@ -15,6 +15,7 @@ public class ConstellationCreator : MonoBehaviour
     {
         instanceval = FindObjectOfType<StarDataLoader>();
         moveInst = FindObjectOfType<StarMove>();
+        InvokeRepeating("CheckRepeat", 0f, 0.5f);
 
     }
 
@@ -71,6 +72,7 @@ public class ConstellationCreator : MonoBehaviour
                 var line1 = Instantiate(linePrefab, constellation.transform);
                 LineRenderer line1Renderer = line1.GetComponent<LineRenderer>();
                 line1Renderer.positionCount = 2;
+                line1Renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
                 constellations.Add(line1);
                 lineList.Add(line1Renderer);
 
@@ -89,14 +91,13 @@ public class ConstellationCreator : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void CheckRepeat()
     {
         if (moveInst.isTimeRunning)
         {
-            Debug.Log("It is being called");
-            //UpdateStarPosition(Time.deltaTime * TimeVal);
             ConstellationSelecter(selectedConst);
         }
-    }
+    }    
+
+    
 }

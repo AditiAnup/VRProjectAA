@@ -6,38 +6,31 @@ using UnityEngine;
 public class StarMove : MonoBehaviour
 {
     public bool isTimeRunning = false;
-    public static float TimeVal = 1000f;
+    public static float TimeVal = 20000f;
     StarDataLoader instanceval;
     ConstellationCreator constinstance;
-    // Start is called before the first frame update
     void Start()
     {
         instanceval = FindObjectOfType<StarDataLoader>();
-        constinstance = FindObjectOfType<ConstellationCreator>();
+        InvokeRepeating("UpdateStarPosition", 0f, 0.5f);
     }
-    public void ToggleTime()
+    public void ToggleTime(bool value)
     {
-        isTimeRunning = !isTimeRunning;
+        isTimeRunning = value;
     }
-    void UpdateStarPosition(float timeDelta)
+    void UpdateStarPosition()
     {
-        foreach (KeyValuePair<float, GameObject> starRet in instanceval.starobjects)
-        {
-            Vector3 displacement = instanceval.starData[starRet.Key].velocity * timeDelta;
-            starRet.Value.transform.position += displacement;
-        }
-    }
-
-    void Update()
-    {
+        
         if (isTimeRunning)
         {
-            UpdateStarPosition(Time.deltaTime * TimeVal);
-            constinstance.ConstellationSelecter(constinstance.selectedConst);
+            Debug.Log("Update Star Position");
+            foreach (KeyValuePair<float, GameObject> starRet in instanceval.starobjects)
+            {
+                Vector3 displacement = instanceval.starData[starRet.Key].velocity * TimeVal * Time.deltaTime;
+                starRet.Value.transform.position += displacement;
+            }
         }
     }
 
-
-    // Update is called once per frame
-   
+    
 }

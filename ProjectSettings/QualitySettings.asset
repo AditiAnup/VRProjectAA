@@ -78,6 +78,7 @@ QualitySettings:
     excludedTargetPlatforms:
     - Android
     - Standalone
+    - iPhone
   - serializedVersion: 2
     name: Medium
     pixelLightCount: 1
@@ -115,6 +116,7 @@ QualitySettings:
     excludedTargetPlatforms:
     - Android
     - Standalone
+    - iPhone
   - serializedVersion: 2
     name: High
     pixelLightCount: 2
@@ -152,6 +154,7 @@ QualitySettings:
     excludedTargetPlatforms:
     - Android
     - Standalone
+    - iPhone
   - serializedVersion: 2
     name: Very High
     pixelLightCount: 3
@@ -189,6 +192,7 @@ QualitySettings:
     excludedTargetPlatforms:
     - Android
     - Standalone
+    - iPhone
   - serializedVersion: 2
     name: Ultra
     pixelLightCount: 4
@@ -226,6 +230,7 @@ QualitySettings:
     excludedTargetPlatforms:
     - Android
     - Standalone
+    - iPhone
   m_PerPlatformDefaultQuality:
     Android: 2
     BJM: 5
