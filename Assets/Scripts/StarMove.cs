@@ -16,7 +16,7 @@ public class StarMove : MonoBehaviour
     {
         instanceval = FindObjectOfType<StarDataLoader>();
         constinstance = FindObjectOfType<ConstellationCreator>();
-        InvokeRepeating("UpdateStarPosition", 0f, 0.1f);
+        InvokeRepeating("UpdateStarPosition", 0f, 0.3f);
         
     }
     public void ToggleTime(bool value)
