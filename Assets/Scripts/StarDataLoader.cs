@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Linq;
+using UnityEngine.UI;
 
 
 public class StarDataLoader : MonoBehaviour
@@ -11,11 +12,12 @@ public class StarDataLoader : MonoBehaviour
     public TextAsset dSource;
     public GameObject cam;
     public GameObject starPrefab;
+    public Slider slider;
     private int starCount = 1;
 
     public static float TimeVal = 1000f;
     StarMove moveInst;
-    public float repeatRate = 0.5f;
+    public float repeatRate = 0.1f;
 
     ExoColor colorinst;
     public Dictionary<float, GameObject> starobjects = new Dictionary<float, GameObject>();
@@ -114,6 +116,132 @@ public class StarDataLoader : MonoBehaviour
 
         }
         
+    }
+
+    public void ChangeScale()
+    {
+        Debug.Log("Entered change scale function");
+        slider.onValueChanged.AddListener((v) =>
+        {
+            Debug.Log(v.ToString());
+
+            float distmultiplier = 0.0F;
+            switch (v)
+            {
+                case 0:
+                    //bla bla
+                    foreach (KeyValuePair<float, GameObject> star in starobjects)
+                    {
+                        
+                        distmultiplier = 0.5F;
+                        
+                        Vector3 currentpos = starData[star.Key].position;
+
+                        Vector3 targetpos = currentpos * distmultiplier;
+                        star.Value.transform.position = targetpos;
+                    }
+                    break;
+
+                case 1:
+                    //bla bla
+                    foreach (KeyValuePair<float, GameObject> star in starobjects)
+                    {
+                        distmultiplier = 0.6F;
+                        Vector3 currentpos = starData[star.Key].position;
+
+                        Vector3 targetpos1 = currentpos * distmultiplier;
+                        star.Value.transform.position = targetpos1;
+                    }
+                    break;
+
+                case 2:
+                    //bla bla
+                    foreach (KeyValuePair<float, GameObject> star in starobjects)
+                    {
+                        //star.transform.position = star.transform.position * 0.7;
+                        distmultiplier = 0.7F;
+                        Vector3 currentpos = starData[star.Key].position;
+
+                        Vector3 targetpos2 = currentpos * distmultiplier;
+                        star.Value.transform.position = targetpos2;
+                    }
+                    break;
+
+                case 3:
+                    //bla bla
+                    foreach (KeyValuePair<float, GameObject> star in starobjects)
+                    {
+                        //star.transform.position = star.transform.position * 0.9;
+                        distmultiplier = 0.9F;
+                        Vector3 currentpos = starData[star.Key].position;
+
+                        Vector3 targetpos3 = currentpos * distmultiplier;
+                        star.Value.transform.position = targetpos3;
+                    }
+                    break;
+
+                case 4:
+                    //bla bla
+
+                    break;
+
+                case 5:
+                    //bla bla
+                    foreach (KeyValuePair<float, GameObject> star in starobjects)
+                    {
+                        //star.transform.position = star.transform.position * 1.3;
+                        distmultiplier = 1.3F;
+                        Vector3 currentpos = starData[star.Key].position;
+
+                        Vector3 targetpos5 = currentpos * distmultiplier;
+                        star.Value.transform.position = targetpos5;
+                    }
+                    break;
+
+                case 6:
+                    //bla bla
+                    foreach (KeyValuePair<float, GameObject> star in starobjects)
+                    {
+                        //star.transform.position = star.transform.position * 1.5;
+                        distmultiplier = 1.5F;
+                        Vector3 currentpos = starData[star.Key].position;
+
+                        Vector3 targetpos6 = currentpos * distmultiplier;
+                        star.Value.transform.position = targetpos6;
+                    }
+                    break;
+
+                case 7:
+                    //bla bla
+                    foreach (KeyValuePair<float, GameObject> star in starobjects)
+                    {
+                        //star.transform.position = star.transform.position * 1.7;
+                        distmultiplier = 1.8F;
+                        Vector3 currentpos = starData[star.Key].position;
+
+                        Vector3 targetpos7 = currentpos * distmultiplier;
+                        star.Value.transform.position = targetpos7;
+                    }
+                    break;
+
+                case 8:
+                    //bla bla
+                    foreach (KeyValuePair<float, GameObject> star in starobjects)
+                    {
+                        //star.transform.position = star.transform.position * 2.0;
+                        distmultiplier = 2.2F;
+                        Vector3 currentpos = starData[star.Key].position;
+
+                        Vector3 targetpos = currentpos * distmultiplier;
+                        star.Value.transform.position = targetpos;
+                    }
+                    break;
+
+            }
+
+
+        });
+
     }
     void StarRendering()
     {

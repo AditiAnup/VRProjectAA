@@ -1,22 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 public class StarMove : MonoBehaviour
 {
+    public float elapsedtime = 0;
     public bool isTimeRunning = false;
-    public static float TimeVal = 20000f;
+    public float TimeVal = 20000f;
     StarDataLoader instanceval;
     ConstellationCreator constinstance;
+    public GameObject text;
     void Start()
     {
         instanceval = FindObjectOfType<StarDataLoader>();
         InvokeRepeating("UpdateStarPosition", 0f, 0.5f);
+        
     }
     public void ToggleTime(bool value)
     {
         isTimeRunning = value;
+        if(!isTimeRunning)
+        {
+            text.SetActive(false);
+        }
+        else
+        {
+            text.SetActive(true);
+        }
     }
     void UpdateStarPosition()
     {
@@ -32,5 +44,20 @@ public class StarMove : MonoBehaviour
         }
     }
 
-    
+    public void ReverseTime()
+    {
+        TimeVal = -TimeVal;
+    }
+    private void Update()
+    {
+        
+        
+        if (isTimeRunning)
+        {
+            elapsedtime += TimeVal * Time.deltaTime;
+            text.GetComponent<TextMeshPro>().text = "Time Elapsed: " + elapsedtime.ToString("F2") + " years";
+        }
+    }
+
+
 }

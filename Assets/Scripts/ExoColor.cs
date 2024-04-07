@@ -24,12 +24,15 @@ public class ExoColor : MonoBehaviour
             {
                 if (colorval == 'O'.ToString())
                 {
-                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.blue);
+                    Color blue = new Color(0f, 0f, 1f, 1f);
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", blue);
                 }
 
                 else if (colorval == 'B'.ToString())
                 {
-                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.cyan);
+                    Color lightBlue = new Color(0.678f, 0.847f, 0.902f, 1f);
+
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", lightBlue);
                 }
 
                 else if (colorval == 'A'.ToString())
@@ -39,22 +42,26 @@ public class ExoColor : MonoBehaviour
 
                 else if (colorval == 'F'.ToString())
                 {
-                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.white);
+                    Color yellowWhite = new Color(1f, 1f, 0.878f, 1f);
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", yellowWhite);
                 }
 
                 else if (colorval == 'G'.ToString())
                 {
-                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.yellow);
+                    Color yellow = new Color(1f, 1f, 0f, 1f);
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", yellow);
                 }
 
                 else if (colorval == 'K'.ToString())
                 {
-                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.red);
+                    Color orange = new Color(1f, 0.647f, 0f, 1f);
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", orange);
                 }
 
                 else if (colorval == 'M'.ToString())
                 {
-                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", Color.magenta);
+                    Color red = new Color(1f, 0f, 0f, 1f);
+                    starRet.Value.GetComponent<Renderer>().material.SetColor("_TintColor", red);
                 }
             }
         }

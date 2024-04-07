@@ -77,10 +77,21 @@ public class ConstellationCreator : MonoBehaviour
                 lineList.Add(line1Renderer);
 
                 Vector3 position1 = instanceval.starobjects[float.Parse(eachLine2[j].Trim())].transform.position;
-
+                
+                Renderer starRenderer = instanceval.starobjects[float.Parse(eachLine2[j].Trim())].GetComponent<Renderer>();
+                if (starRenderer != null)
+                {
+                    starRenderer.enabled = true;
+                    instanceval.starobjects[float.Parse(eachLine2[j].Trim())].transform.LookAt(instanceval.cam.transform);
+                }
 
                 Vector3 position2 = instanceval.starobjects[float.Parse(eachLine2[j + 1].Trim())].transform.position;
-
+                Renderer starRenderer2 = instanceval.starobjects[float.Parse(eachLine2[j + 1].Trim())].GetComponent<Renderer>();
+                if (starRenderer2 != null)
+                {
+                    starRenderer2.enabled = true;
+                    instanceval.starobjects[float.Parse(eachLine2[j+1].Trim())].transform.LookAt(instanceval.cam.transform);
+                }
 
                 line1Renderer.SetPosition(0, position1);
                 line1Renderer.SetPosition(1, position2);
