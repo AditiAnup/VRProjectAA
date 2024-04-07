@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StartTelport : MonoBehaviour
 {
+    //Changed File
     public GameObject startPos;
     public GameObject playercont;
     Dictionary<float, GameObject> resObjects = new Dictionary<float, GameObject>();
