@@ -8,7 +8,7 @@ public class StarMove : MonoBehaviour
 {
     public float elapsedtime = 0;
     public bool isTimeRunning = false;
-    public float TimeVal = 20000f;
+    public float TimeVal = 200000f;
     StarDataLoader instanceval;
     ConstellationCreator constinstance;
     public GameObject text;
@@ -54,8 +54,15 @@ public class StarMove : MonoBehaviour
         
         if (isTimeRunning)
         {
-            elapsedtime += TimeVal * Time.deltaTime;
+            //foreach (KeyValuePair<float, GameObject> starRet in instanceval.starobjects)
+            //{
+            //    Vector3 displacement = instanceval.starData[starRet.Key].velocity *TimeVal * Time.deltaTime;
+            //    starRet.Value.transform.position += displacement;
+
+            //}
+            elapsedtime += Time.deltaTime;
             text.GetComponent<TextMeshPro>().text = "Time Elapsed: " + elapsedtime.ToString("F2") + " years";
+
         }
     }
 
