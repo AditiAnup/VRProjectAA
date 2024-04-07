@@ -15,7 +15,7 @@ public class ConstellationCreator : MonoBehaviour
     {
         instanceval = FindObjectOfType<StarDataLoader>();
         moveInst = FindObjectOfType<StarMove>();
-        InvokeRepeating("CheckRepeat", 0f, 0.5f);
+        InvokeRepeating("CheckRepeat", 0f, 0.1f);
 
     }
 

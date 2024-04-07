@@ -8,14 +8,15 @@ public class StarMove : MonoBehaviour
 {
     public float elapsedtime = 0;
     public bool isTimeRunning = false;
-    public float TimeVal = 200000f;
+    public float TimeVal = 20000f;
     StarDataLoader instanceval;
     ConstellationCreator constinstance;
     public GameObject text;
     void Start()
     {
         instanceval = FindObjectOfType<StarDataLoader>();
-        InvokeRepeating("UpdateStarPosition", 0f, 0.5f);
+        constinstance = FindObjectOfType<ConstellationCreator>();
+        InvokeRepeating("UpdateStarPosition", 0f, 0.1f);
         
     }
     public void ToggleTime(bool value)
@@ -41,6 +42,9 @@ public class StarMove : MonoBehaviour
                 Vector3 displacement = instanceval.starData[starRet.Key].velocity * TimeVal * Time.deltaTime;
                 starRet.Value.transform.position += displacement;
             }
+            constinstance.ConstellationSelecter(constinstance.selectedConst);
+
+
         }
     }
 
