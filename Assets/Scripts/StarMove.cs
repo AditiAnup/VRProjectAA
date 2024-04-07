@@ -8,7 +8,7 @@ public class StarMove : MonoBehaviour
 {
     public float elapsedtime = 0;
     public bool isTimeRunning = false;
-    public float TimeVal = 20000f;
+    public float TimeVal = 1000f;
     StarDataLoader instanceval;
     ConstellationCreator constinstance;
     public GameObject text;
@@ -16,7 +16,7 @@ public class StarMove : MonoBehaviour
     {
         instanceval = FindObjectOfType<StarDataLoader>();
         constinstance = FindObjectOfType<ConstellationCreator>();
-        InvokeRepeating("UpdateStarPosition", 0f, 0.3f);
+        InvokeRepeating("UpdateStarPosition", 0f, 0.5f);
         
     }
     public void ToggleTime(bool value)

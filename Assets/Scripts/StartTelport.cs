@@ -10,11 +10,13 @@ public class StartTelport : MonoBehaviour
     Dictionary<float, GameObject> resObjects = new Dictionary<float, GameObject>();
     Dictionary<float, StarData> starReset = new Dictionary<float, StarData>();
     StarDataLoader instanceval;
+    ConstellationCreator coinstance;
     StarMove moveinstance;
     void Start()
     {
         instanceval =  FindObjectOfType<StarDataLoader>();
         moveinstance = FindObjectOfType<StarMove>();
+        coinstance = FindObjectOfType<ConstellationCreator>();
         resObjects = instanceval.starobjects;
         starReset = instanceval.starData;
     }
@@ -27,5 +29,6 @@ public class StartTelport : MonoBehaviour
         {
             starRet.Value.transform.position = starReset[starRet.Key].position;
         }
+        coinstance.ConstellationSelecter(coinstance.selectedConst);
     }
 }

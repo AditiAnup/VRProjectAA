@@ -15,8 +15,6 @@ public class ConstellationCreator : MonoBehaviour
     {
         instanceval = FindObjectOfType<StarDataLoader>();
         moveInst = FindObjectOfType<StarMove>();
-        //InvokeRepeating("CheckRepeat", 0f, 0.1f);
-
     }
 
     public void ConstellationSelecter(int i)
@@ -87,17 +85,5 @@ public class ConstellationCreator : MonoBehaviour
                 k += 2;
             }
         }
-
-
     }
-
-    void CheckRepeat()
-    {
-        if (moveInst.isTimeRunning)
-        {
-            ConstellationSelecter(selectedConst);
-        }
-    }    
-
-    
 }
