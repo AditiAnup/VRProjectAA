@@ -25,6 +25,7 @@ public class StarMove : MonoBehaviour
         isTimeRunning = value;
         if(!isTimeRunning)
         {
+            elapsedtime = 0;
             text.SetActive(false);
         }
         else
@@ -65,7 +66,16 @@ public class StarMove : MonoBehaviour
             //    starRet.Value.transform.position += displacement;
 
             //}
-            elapsedtime += Time.deltaTime;
+            if(TimeVal<0)
+            {
+                elapsedtime -= Time.deltaTime;
+            }
+            else
+            {
+                elapsedtime += Time.deltaTime;
+            }
+
+            
             text.GetComponent<TextMeshPro>().text = "Time Elapsed: " + elapsedtime.ToString("F2") + " years";
 
         }
